@@ -8,25 +8,11 @@ from time import sleep
 import matplotlib.pyplot as plt
 
 
-class Train(Agent):
+class CliffWalker(Agent):
     def __init__(self,env_name):
         Agent.__init__(self)
         self.env_name = env_name
         self.q_table_path = os.path.join("TrainingData",env_name,"q_table.npy")
-
-    def save_q_table(self, q_table):
-        # Ensure the directory exists
-        os.makedirs(os.path.dirname(self.q_table_path), exist_ok=True)
-        np.save(self.q_table_path, q_table)
-        print(f"Q-table saved to {self.q_table_path}")
-
-    def load_q_table(self):
-        if os.path.exists(self.q_table_path):
-            self.q_table = np.load(self.q_table_path)
-            print(f"Q-table loaded from {self.q_table_path}")
-        else:
-            print("Q-table file not found. Initializing new Q-table.")
-            self.q_table = np.zeros([self.env.observation_space.n, self.env.action_space.n])
 
 
     def show_q(self,env,q_table):

@@ -1,7 +1,7 @@
-from Train import Train
+from CliffWalker import CliffWalker
 
 env_name = 'CliffWalking-v0'
-trainer = Train(env_name)
+trainer = CliffWalker(env_name)
 
 # cliff parameters
 
