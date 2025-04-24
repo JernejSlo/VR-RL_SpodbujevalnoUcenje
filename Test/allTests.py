@@ -7,10 +7,10 @@ trainer = Train(env_name)
 
 lr = 0.1
 discount_factor = 0.95
-epochs = 10000
+epochs = 1000
 maxSteps = 99
 epsilon = 1
 
 trainer.cliff_train(lr,discount_factor,epochs,maxSteps,epsilon)
-trainer.cliff_test()
-#trainer.train_Q(lr,epochs,maxSteps,fi,eta)
+trainer.cliff_test(show_q=True)
+
