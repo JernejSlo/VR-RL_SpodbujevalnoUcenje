@@ -44,8 +44,6 @@ class CliffWalker(Agent):
 
         plt.show()
 
-    def train_Q(self,lr,epochs,max_steps,fi,eta):
-        pass
 
     def cliff_test(self,**kwargs):
         self.load_q_table()
@@ -71,7 +69,7 @@ class CliffWalker(Agent):
             self.show_q(env,self.q_table)
 
 
-    def cliff_train(self,learning_rate,discount_factor,epochs,max_steps,epsilon):
+    def cliff_train(self,learning_rate,discount_factor,epochs,max_steps):
         env = gym.make(self.env_name, render_mode="rgb_array")
         env.reset()
         env.render()
@@ -85,10 +83,20 @@ class CliffWalker(Agent):
 
         START_EPSILON_DECAYING = 1
         END_EPSILON_DECAYING = epochs // 2
-        epsilon_decay_value = epsilon / (END_EPSILON_DECAYING - START_EPSILON_DECAYING)
+        # Exploration parameters
+        epsilon = 1.0  # Exploration rate
+        max_epsilon = 1.0  # Exploration probability at start
+        min_epsilon = 0.01  # Minimum exploration probability
+        decay_rate = 0.001
+
         SHOW_EVERY = 100
 
         for episode in range(epochs):
+
+            epsilon = min_epsilon + (max_epsilon - min_epsilon) * np.exp(-decay_rate * episode)
+
+            epsilon_decay_value = epsilon / (END_EPSILON_DECAYING - START_EPSILON_DECAYING)
+
             state = env.reset()
             state = state[0]  ##
             done = False

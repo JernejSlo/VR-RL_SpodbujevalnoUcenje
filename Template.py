@@ -20,10 +20,12 @@ class Template(Agent):
 
         # code
 
-
-
     def Train(self,learning_rate,discount_factor,epochs,max_steps,epsilon):
 
         # code
 
         self.save_q_table(self.q_table)
+        
+    def epsilon(self):
+
+        pass
