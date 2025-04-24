@@ -7,7 +7,7 @@ trainer = Train(env_name)
 
 lr = 0.1
 discount_factor = 0.95
-epochs = 1000
+epochs = 10000
 maxSteps = 99
 epsilon = 1
 

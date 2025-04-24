@@ -48,7 +48,7 @@ class Train(Agent):
         START_EPSILON_DECAYING = 1
         END_EPSILON_DECAYING = epochs // 2
         epsilon_decay_value = epsilon / (END_EPSILON_DECAYING - START_EPSILON_DECAYING)
-        SHOW_EVERY = 1000
+        SHOW_EVERY = 100
 
         for episode in range(epochs):
             state = env.reset()
@@ -57,8 +57,8 @@ class Train(Agent):
 
             trial_length = 0
 
-            while not done:
-                # for step in range(max_steps):
+            #while not done:
+            for step in range(max_steps):
                 if (random.uniform(0, 1) < epsilon):  # Exploration with random action
                     action = env.action_space.sample()
                 else:  # Use the action with the highest q-value
@@ -77,8 +77,8 @@ class Train(Agent):
                 if episode % SHOW_EVERY == 0:
                     trial_length += 1
 
-                # if done:
-                #    break
+                if done:
+                    break
 
             if episode % SHOW_EVERY == 0:
                 print(f'Episode: {episode:>5d}, episode length: {int(trial_length):>5d}')
